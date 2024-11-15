@@ -23,7 +23,8 @@ def main_menu(zoo):
     print("\n### Main Menu ###")
     print("1. Manage zoo")
     print("2. Manage cages")
-    print("3. Exit")
+    print("3. Animal list per cages")
+    print("4. Exit")
     choice = input("Please select an option (enter the number):")
 
     match choice:
@@ -38,7 +39,20 @@ def main_menu(zoo):
                 time.sleep(1)
                 main_menu(zoo)
         case "3":
+            cage_list = zoo.get_cage_list()
+            if len(cage_list) > 0:
+                for cage in cage_list:
+                    print(f"\nCage number {(cage_list.index(cage) + 1)}")
+                    cage.display_animals()
+                    time.sleep(1)
+                main_menu(zoo)
+            else:
+                print("There is currently no cages in the zoo.")
+                time.sleep(1)
+                main_menu(zoo)
+        case "4":
             print("Goodbye")
+            time.sleep(1)
             exit()
         case _:
             print("Incorrect choice")
